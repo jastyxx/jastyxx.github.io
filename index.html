@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penghitung Pytagoras By Anjas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          container: {
+            center: true,
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box !important;
+    }
+  </style>
+</head>
+
+<body class="bg-sky-300">
+  <div class="container px-4 py-12">
+    <div class="grid grid-cols-4 gap-4 text-sky-500">
+      <div
+        class="bg-white col-span-4 py-8 px-4 rounded flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+        <h1 class="font-bold text-2xl uppercase tracking-wider">Anjastian SA <br> XII RPL 2</h1>
+        <h1 class="font-bold text-2xl uppercase tracking-wider">Hitung Phytagoras</h1>
+        <ul class="flex flex-wrap list-none border-b-0">
+          <li>
+            <button id="navSisiMiring" class="block font-medium text-xs leading-tight uppercase
+              border-transparent px-6 hover:bg-gray-100 py-3 transition border-b border-sky-500">Sisi
+              Miring</button>
+          </li>
+          <li>
+            <button id="navAlas" class="block font-medium text-xs leading-tight uppercase
+              border-transparent px-6 hover:bg-gray-100 py-3 transition">
+              Alas</button>
+          </li>
+          <li>
+            <button id="navSisiTegak" class="block font-medium text-xs leading-tight uppercase
+              border-transparent px-6 hover:bg-gray-100 py-3 transition">
+              Sisi Tegak</button>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-white lg:col-span-3 md:col-span-2 col-span-4 py-8 px-4 rounded">
+        <form id="formPhy" autocomplete="off">
+          <div class="flex flex-col space-y-3">
+            <div class="w-full">
+              <label for="" class="mb-2 inline-block">Alas (cm)</label>
+              <input type="text" id="inputAlas"
+                class="w-full border border-sky-500 px-1 py-1 rounded focus:outline-0 focus:ring focus:ring-sky-100 disabled:bg-gray-200 transition"
+                value="0">
+            </div>
+            <div class="w-full">
+              <label for="" class="mb-2 inline-block">Sisi Tegak (cm)</label>
+              <input type="text" id="inputSisiTegak"
+                class="w-full border border-sky-500 px-1 py-1 rounded focus:outline-0 focus:ring focus:ring-sky-100 disabled:bg-gray-200 transition"
+                value="0">
+            </div>
+            <div class="w-full">
+              <label for="" class="mb-2 inline-block">Sisi Miring (cm)</label>
+              <input type="text" id="inputSisiMiring"
+                class="w-full border border-sky-500 px-1 py-1 rounded focus:outline-0 focus:ring focus:ring-sky-100 disabled:bg-gray-200 transition"
+                value="0" disabled>
+            </div>
+            <button type="submit"
+              class="bg-sky-500 py-2 px-3 text-white mt-3 rounded transition hover:scale-110 self-end">Hitung</button>
+          </div>
+        </form>
+      </div>
+      <div class="bg-white md:col-span-2 lg:col-span-1 col-span-4 py-8 px-4 rounded">
+        <h1 class="font-bold text-2xl uppercase tracking-wider mb-3">Hasil</h1>
+        <div class="flex">
+          <p id="textPhy">Sisi Miring =</p>
+          <p id="resultPhy" class="ml-1">0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<footer class="fixed bottom-0 w-full py-6 bg-sky-400 ">
+      <div class="container flex justify-center item-center">
+      <p class="text-neutral-100"> SC : 1.  https://www.zenius.net/blog/rumus-phytagoras</p>
+    </div>  
+    <div class="container flex justify-center item-center">
+      <p class="text-neutral-100"> 2. Codingan Sandika Galih dan Ziyadatul Khair</p>
+    </div>  
+    <div class="container flex justify-center item-center">
+      <p class="text-neutral-100"> 3. https://www.w3docs.com</p>
+    </div>  
+   </footer>
+
+  <script>
+    const navSisiMiring = document.querySelector('#navSisiMiring');
+    const navAlas = document.querySelector('#navAlas');
+    const navSisiTegak = document.querySelector('#navSisiTegak');
+    const inputAlas = document.querySelector('#inputAlas');
+    const inputSisiTegak = document.querySelector('#inputSisiTegak');
+    const inputSisiMiring = document.querySelector('#inputSisiMiring');
+    const textPhy = document.querySelector('#textPhy');
+    const resultPhy = document.querySelector('#resultPhy');
+    const formPhy = document.querySelector('#formPhy');
+
+    inputAlas.addEventListener('keypress', function (e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+      }
+      if (e.keyCode < 48 || e.keyCode > 57) {
+        e.preventDefault();
+      }
+    });
+
+    inputSisiTegak.addEventListener('keypress', function (e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+      }
+      if (e.keyCode < 48 || e.keyCode > 57) {
+        e.preventDefault();
+      }
+    });
+
+    inputSisiMiring.addEventListener('keypress', function (e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+      }
+      if (e.keyCode < 48 || e.keyCode > 57) {
+        e.preventDefault();
+      }
+    });
+
+    const reset = () => {
+      inputAlas.value = 0;
+      inputSisiTegak.value = 0;
+      inputSisiMiring.value = 0;
+      resultPhy.innerHTML = '0';
+    }
+
+    navSisiMiring.addEventListener('click', function () {
+      navSisiMiring.classList.add('border-b', 'border-sky-500');
+      navAlas.classList.remove('border-b', 'border-sky-500');
+      navSisiTegak.classList.remove('border-b', 'border-sky-500');
+      inputAlas.disabled = false;
+      inputSisiTegak.disabled = false;
+      inputSisiMiring.disabled = true;
+      reset();
+      textPhy.innerHTML = 'Sisi Miring = ';
+    });
+
+    navAlas.addEventListener('click', function () {
+      navAlas.classList.add('border-b', 'border-sky-500');
+      navSisiMiring.classList.remove('border-b', 'border-sky-500');
+      navSisiTegak.classList.remove('border-b', 'border-sky-500');
+      inputSisiMiring.disabled = false;
+      inputSisiTegak.disabled = false;
+      inputAlas.disabled = true;
+      reset();
+      textPhy.innerHTML = 'Alas = ';
+    });
+
+    navSisiTegak.addEventListener('click', function () {
+      navSisiTegak.classList.add('border-b', 'border-sky-500');
+      navSisiMiring.classList.remove('border-b', 'border-sky-500');
+      navAlas.classList.remove('border-b', 'border-sky-500');
+      inputSisiMiring.disabled = false;
+      inputAlas.disabled = false;
+      inputSisiTegak.disabled = true;
+      reset();
+      textPhy.innerHTML = 'Sisi Tegak = ';
+    });
+
+    // when formPhy is submitted calculate phytagoras 
+    formPhy.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let alas = parseInt(inputAlas.value);
+      let sisitegak = parseInt(inputSisiTegak.value);
+      let sisimiring = parseInt(inputSisiMiring.value);
+
+      if (navSisiMiring.classList.contains('border-b', 'border-sky-500')) {
+        result = Math.sqrt(Math.pow(alas, 2) + Math.pow(sisitegak, 2));
+        resultPhy.innerHTML = result.toFixed(2);
+      } else if (navSisiTegak.classList.contains('border-b', 'border-sky-500')) {
+        result = Math.sqrt(Math.pow(sisimiring, 2) - Math.pow(alas, 2));
+        resultPhy.innerHTML = result.toFixed(2);
+      } else if (navAlas.classList.contains('border-b', 'border-sky-500')) {
+        result = Math.sqrt(Math.pow(sisimiring, 2) - Math.pow(sisitegak, 2));
+        resultPhy.innerHTML = result.toFixed(2);
+      }
+    });
+  </script>
+</body>
+
+</html> 
